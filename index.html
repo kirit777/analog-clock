@@ -1,0 +1,220 @@
+<!--
+tittle : Clock
+author : gareja kirit
+@copyright : saki web development
+-->
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Clock by gareja kirit</title>
+    <meta name="google-site-verification" content="uza6Gh8xbuNXozz7q8MICSSLrgnoLzioHvqTE2tclI4" />
+<style type="text/css">
+	*{
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+	}
+	.main_div{
+		height: 100vh;
+		width: 100vw;
+		display: grid;
+		place-items:center;
+		background-color: #000;
+	}
+	#bolt{
+		color: #fff;
+		font-size: 2rem;
+		letter-spacing: 10px;
+		animation: rgbolt 1s infinite linear;
+	}
+	@keyframes rgbolt{
+			0%{
+				color: red;
+			}
+			33%{
+				color: green;
+			}
+			100%{
+				color: blue;
+			}
+		}
+	.clock{
+		height: 40rem;
+		width: 40rem;
+		background-color: #000;
+		border-radius: 50%;
+		position:  relative;
+		overflow: hidden;
+		transform: rotate(-93deg);
+		/*filter: drop-shadow(0px 0px 20px #fff);*/
+		animation: rgb 1s infinite linear;
+	}
+	@keyframes rgb{
+		0%{
+			filter: drop-shadow(0px 0px 50px red);
+			border:3px solid red;
+		}
+		33%{
+			filter: drop-shadow(0px 0px 20px green);
+			border:3px solid green;
+		}
+		100%{
+			filter: drop-shadow(0px 0px 50px blue);
+			border:3px solid blue;
+		}
+
+	}
+	.s_line{
+		top: 50%;
+		right: 10%;
+		position: absolute;
+		height: .3rem;
+		width: 52%;
+		background-color: #fff;
+		border-radius: 10px;
+		transform-origin: 20% 20%;
+		/*animation: cir 2s infinite linear;*/
+		filter: drop-shadow(0px -10px 10px #fff);
+	}
+	.m_line{
+		top: 49.7%;
+		right: 11%;
+		position: absolute;
+		height: .7rem;
+		width: 40%;
+		background-color: #fff;
+		border-radius: 10px;
+		transform-origin: 0% 0%;
+		/*animation: cir 2s infinite linear;*/
+		filter: drop-shadow(0px -10px 10px #fff);
+	}
+	.h_line{
+		top: 50%;
+		right: 23%;
+		position: absolute;
+		height: 1rem;
+		width: 30%;
+		background-color: red;
+		border-radius: 10px;
+		transform-origin: 0% 0%;
+		filter: drop-shadow(10px -10px 10px red);
+		/*animation: cir 2s infinite linear;*/
+	}
+	#t12{
+		position: absolute;
+		top: 50%;
+		right: 2%;
+		font-size: 2rem;
+		color: #fff;
+		z-index: 99999;
+		transform: rotate(94deg);
+		text-shadow: 1px 1px 7px #000;
+	}
+	#t9{
+		position: absolute;
+		top: 2%;
+		right: 44%;
+		font-size: 2rem;
+		color: #fff;
+		z-index: 99999;
+		text-shadow: 1px 1px 7px #000;
+		transform: rotate(94deg);
+	}
+	#t3{
+		position: absolute;
+		bottom: 1%;
+		right: 50%;
+		font-size: 2rem;
+		color: #fff;
+		z-index: 99999;
+		text-shadow: 1px 1px 7px #000;
+		transform: rotate(94deg);
+	}
+	#t6{
+		position: absolute;
+		top: 45%;
+		left: 2%;
+		font-size: 2rem;
+		color: #fff;
+		z-index: 99999;
+		transform: rotate(94deg);
+		text-shadow: 1px 1px 7px #000;
+	}
+	#tim{
+		color: #fff;
+		font-size: 3rem;
+		z-index: 999;
+	}
+	.cir{
+		border-top: #fff double 1.4rem;
+		border-bottom: red double 1.4rem;
+		border-left: #fff double 1.4rem;
+		border-right:  #fff double 1.4rem;
+		border-radius: 50%;
+		position: absolute;
+		top: 46%;
+		right: 47%;
+		transform: translateY(-50%);
+		z-index: 999;
+		filter: drop-shadow(0px -10px 20px red);
+		animation: rot 2s infinite linear;
+	}
+	@keyframes rot{
+		from{
+			transform: rotate(0deg);
+		}
+		to{
+			transform: rotate(360deg);
+		}
+	}
+	@media (min-width: 100px , max-width: 300px){
+		.main_div{
+			height: 50vh;
+			width: 100vw;
+			display: grid;
+			place-items:center;
+			background-color: #000;
+		}
+	}
+</style>
+</head>
+<body>
+<div class="main_div">
+	<div class="clock">
+		<div id="t12">12</div>
+		<div id="t9">9</div>
+		<div id="t3">3</div>
+		<div id="t6">6</div>
+		<div id="s_line" class="s_line"></div>
+		<div id="m_line" class="m_line"></div>
+		<div id="h_line" class="h_line"></div>
+		<div class="cir"></div>
+	</div>
+	<h2 id="bolt">Bolt</h2>
+</div>
+<script type="text/javascript">
+	let s_line = document.getElementById("s_line");
+	let m_line = document.getElementById("m_line");
+	let h_line = document.getElementById("h_line")
+	const deg = 6;
+
+const fan = () =>{
+	let time = new Date();
+	let h = time.getHours() * 30;
+	let m = time.getMinutes() * deg;
+	let s = time.getSeconds() * deg;
+		
+	h_line.style.transform = `rotateZ(${(h)+(m/12)}deg)`;
+	m_line.style.transform = `rotateZ(${m}deg)`;
+	s_line.style.transform = `rotateZ(${s}deg)`;
+
+
+}
+
+setInterval(() =>{
+fan();	
+});
+
+</script>
+</body>
+</html>
